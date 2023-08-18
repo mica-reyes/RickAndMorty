@@ -1,7 +1,8 @@
 package com.example.rickandmorty.data
 
 
-import com.example.rickandmorty.model.Character
+import com.example.rickandmorty.fake.FakeCharacterApiService
+import com.example.rickandmorty.fake.FakeDataSource
 import com.example.rickandmorty.model.CharacterListResponse
 import com.example.rickandmorty.network.CharacterApiService
 import kotlinx.coroutines.test.runTest
@@ -12,44 +13,18 @@ import org.junit.Assert.*
 
 class CharacterRepositoryImplTest {
 
+    lateinit var fakeCharacterListResponse: CharacterListResponse
+    lateinit var fakeApiService: CharacterApiService
+
     @Before
     fun setUp() {
+        fakeCharacterListResponse = FakeDataSource.fakeCharacterListResponse
+        fakeApiService = FakeCharacterApiService()
     }
 
     @Test
     fun `characterRepositoryImpl getCharacterList verifyCharacterList`() = runTest {
-        val repository = CharacterRepositoryImpl(object : CharacterApiService {
-            override suspend fun getCharacterList(): CharacterListResponse {
-                return CharacterListResponse(
-                    listOf(
-                        Character(
-                            name = "Rick Sanchez",
-                            id = 1,
-                            image = "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-                        ),
-                        Character(
-                            name = "Morty Smith",
-                            id = 2,
-                            image = "https://rickandmortyapi.com/api/character/avatar/2.jpeg"
-                        )
-                    )
-                )
-            }
-
-        })
-        assertEquals(repository.getCharacterList(), CharacterListResponse(
-            listOf(
-                Character(
-                    name = "Rick Sanchez",
-                    id = 1,
-                    image = "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-                ),
-                Character(
-                    name = "Morty Smith",
-                    id = 2,
-                    image = "https://rickandmortyapi.com/api/character/avatar/2.jpeg"
-                )
-            )
-        ))
+        val repository = CharacterRepositoryImpl(fakeApiService)
+        assertEquals(repository.getCharacterList(), fakeCharacterListResponse)
     }
 }

@@ -21,7 +21,7 @@ class CharacterViewModel @Inject constructor(private val repository: CharacterRe
         getAllCharacters()
     }
 
-    private fun getAllCharacters() {
+    fun getAllCharacters() {
         viewModelScope.launch {
             state = try {
                 CharacterState.Success(repository.getCharacterList())

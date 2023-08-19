@@ -1,7 +1,5 @@
 package com.example.rickandmorty.ui
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -13,8 +11,8 @@ fun HomeScreen(
     viewModel: CharacterViewModel = hiltViewModel()
 ) {
     when (val state = viewModel.state) {
-        CharacterState.Error -> ErrorScreen(modifier.fillMaxSize())
-        CharacterState.Loading -> Text("Loading")
-        is CharacterState.Success -> CharacterListScreen(characterListResponse = state.characterListResponse)
+        CharacterState.Error -> ErrorScreen(viewModel::getAllCharacters)
+        CharacterState.Loading -> ShimmerScreen()
+        is CharacterState.Success -> CharacterListScreen(characterListResponse = state.characterListResponse )
     }
 }

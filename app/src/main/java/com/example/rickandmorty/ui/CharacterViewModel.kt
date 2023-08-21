@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rickandmorty.data.CharacterRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Inject
@@ -23,6 +24,7 @@ class CharacterViewModel @Inject constructor(private val repository: CharacterRe
 
     fun getAllCharacters() {
         viewModelScope.launch {
+            delay(800)
             state = try {
                 CharacterState.Success(repository.getCharacterList())
             } catch (e: IOException) {

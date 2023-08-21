@@ -13,6 +13,6 @@ fun HomeScreen(
     when (val state = viewModel.state) {
         CharacterState.Error -> ErrorScreen(viewModel::getAllCharacters)
         CharacterState.Loading -> ShimmerScreen()
-        is CharacterState.Success -> CharacterListScreen(characterListResponse = state.characterListResponse )
+        is CharacterState.Success -> CharacterListScreen(characterListResponse = state.characterListResponse)
     }
 }

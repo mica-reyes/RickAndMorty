@@ -1,10 +1,11 @@
 package com.example.rickandmorty.ui
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -13,18 +14,19 @@ import com.example.rickandmorty.model.Character
 import com.example.rickandmorty.model.CharacterListResponse
 import com.example.rickandmorty.ui.theme.RickAndMortyTheme
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CharacterListScreen(
     modifier: Modifier = Modifier, characterListResponse: CharacterListResponse
 ) {
-    LazyVerticalGrid(
-         columns = GridCells.Adaptive(minSize = 150.dp),
+    LazyVerticalStaggeredGrid(
+        columns = StaggeredGridCells.Adaptive(minSize = 150.dp),
         contentPadding = PaddingValues(4.dp),
         modifier = modifier.fillMaxWidth()
     ) {
-        items(items = characterListResponse.results, key = { it.id }) {
+        itemsIndexed(items = characterListResponse.results) { index, character ->
             CharacterCard(
-                character = it
+                character = character
             )
         }
     }

@@ -1,6 +1,6 @@
 package com.example.rickandmorty.ui
 
-import androidx.compose.foundation.layout.Column
+
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
@@ -12,6 +12,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.rickandmorty.R
@@ -26,19 +28,22 @@ fun CharacterCard(
         modifier = modifier.padding(8.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
-        Column() {
-            AsyncImage(
-                model = ImageRequest.Builder(context = LocalContext.current)
-                    .data(character.image)
-                    .crossfade(2000)
-                    .build(),
-                contentDescription = null,
-                error = painterResource(id = R.drawable.ic_connection_error),
-                placeholder = painterResource(id = R.drawable.loading_img),
-                contentScale = ContentScale.Crop,
-                modifier = modifier.fillMaxSize()
-            )
-            Text(text = character.name)
-        }
+        AsyncImage(
+            model = ImageRequest.Builder(context = LocalContext.current)
+                .data(character.image)
+                .crossfade(2000)
+                .build(),
+            contentDescription = null,
+            error = painterResource(id = R.drawable.ic_connection_error),
+            placeholder = painterResource(id = R.drawable.loading_img),
+            contentScale = ContentScale.Crop,
+            modifier = modifier.fillMaxSize()
+        )
+        Text(
+            text = character.name,
+            modifier = modifier.padding(horizontal = 8.dp),
+            fontSize = 34.sp, lineHeight = 1.em
+        )
     }
 }
+

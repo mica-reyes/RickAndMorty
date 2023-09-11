@@ -1,7 +1,7 @@
 package com.example.rickandmorty.fake
 
-import com.example.rickandmorty.model.Character
-import com.example.rickandmorty.model.CharacterListResponse
+import com.reyesmicaela.rickandmorty.model.Character
+import com.reyesmicaela.rickandmorty.model.CharacterListResponse
 
 object FakeDataSource {
 val fakeCharacterListResponse= CharacterListResponse(

@@ -1,7 +1,7 @@
 package com.example.rickandmorty.fake
 
-import com.example.rickandmorty.data.CharacterRepository
-import com.example.rickandmorty.model.CharacterListResponse
+import com.reyesmicaela.rickandmorty.data.CharacterRepository
+import com.reyesmicaela.rickandmorty.model.CharacterListResponse
 
 class FakeCharacterRepository: CharacterRepository {
     override suspend fun getCharacterList(): CharacterListResponse {

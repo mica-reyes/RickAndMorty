@@ -1,4 +1,4 @@
-package com.reyesmicaela.rickandmorty.ui
+package com.reyesmicaela.rickandmorty.ui.home
 
 import com.reyesmicaela.rickandmorty.model.CharacterListResponse
 

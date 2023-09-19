@@ -3,8 +3,8 @@ package com.example.rickandmorty.ui
 import com.example.rickandmorty.fake.FakeCharacterRepository
 import com.example.rickandmorty.fake.FakeDataSource
 import com.example.rickandmorty.rules.TestDispatcherRule
-import com.reyesmicaela.rickandmorty.ui.CharacterState
-import com.reyesmicaela.rickandmorty.ui.CharacterViewModel
+import com.reyesmicaela.rickandmorty.ui.home.CharacterState
+import com.reyesmicaela.rickandmorty.ui.home.CharacterViewModel
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 

@@ -1,4 +1,4 @@
-package com.reyesmicaela.rickandmorty.ui
+package com.reyesmicaela.rickandmorty.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.PaddingValues
@@ -8,16 +8,16 @@ import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.reyesmicaela.rickandmorty.model.Character
 import com.reyesmicaela.rickandmorty.model.CharacterListResponse
-import com.reyesmicaela.rickandmorty.ui.theme.RickAndMortyTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CharacterListScreen(
-    modifier: Modifier = Modifier, characterListResponse: CharacterListResponse
+    modifier: Modifier = Modifier,
+    characterListResponse: CharacterListResponse,
+    onCharacterClick: (Character) -> Unit
 ) {
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Adaptive(minSize = 150.dp),
@@ -26,21 +26,10 @@ fun CharacterListScreen(
     ) {
         itemsIndexed(items = characterListResponse.results) { index, character ->
             CharacterCard(
-                character = character
+                character = character,
+                onCharacterClick = { onCharacterClick(it) }
             )
         }
     }
-}
 
-@Preview(showBackground = true)
-@Composable
-fun CharacterListScreenPreview() {
-    RickAndMortyTheme {
-        val mockData = CharacterListResponse(
-            results = List(10) {
-                Character(name = "", id = it, image = "")
-            }
-        )
-        CharacterListScreen(characterListResponse = mockData)
-    }
 }

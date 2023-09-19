@@ -1,4 +1,4 @@
-package com.reyesmicaela.rickandmorty.ui
+package com.reyesmicaela.rickandmorty.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.dp
 import com.reyesmicaela.rickandmorty.R
 
 @Composable
-fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
-    Column(
+fun ErrorScreen(retryAction: () -> Unit  , modifier: Modifier = Modifier) {
+    Column (
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center

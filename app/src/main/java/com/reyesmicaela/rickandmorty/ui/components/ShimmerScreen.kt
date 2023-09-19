@@ -1,4 +1,4 @@
-package com.reyesmicaela.rickandmorty.ui
+package com.reyesmicaela.rickandmorty.ui.components
 
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -45,12 +45,12 @@ fun shimmerBrush(targetValue: Float): Brush {
 }
 
 @Composable
-fun ShimmerScreen(modifier: Modifier = Modifier) {
+fun ShimmerScreen(modifier: Modifier = Modifier, count: Int) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 150.dp),
         contentPadding = PaddingValues(4.dp)
     ) {
-        items(20) {
+        items(count) {
            Box(
                 modifier = Modifier
                     .padding(8.dp)

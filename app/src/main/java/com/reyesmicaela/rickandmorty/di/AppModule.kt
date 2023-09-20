@@ -1,8 +1,8 @@
 package com.reyesmicaela.rickandmorty.di
 
-import com.reyesmicaela.rickandmorty.data.CharacterRepository
-import com.reyesmicaela.rickandmorty.data.CharacterRepositoryImpl
-import com.reyesmicaela.rickandmorty.network.CharacterApiService
+import com.reyesmicaela.rickandmorty.data.repository.CharacterRepository
+import com.reyesmicaela.rickandmorty.data.repository.CharacterRepositoryImpl
+import com.reyesmicaela.rickandmorty.data.remote.CharacterApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

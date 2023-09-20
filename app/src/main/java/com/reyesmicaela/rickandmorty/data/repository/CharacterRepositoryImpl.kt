@@ -1,7 +1,7 @@
-package com.reyesmicaela.rickandmorty.data
+package com.reyesmicaela.rickandmorty.data.repository
 
+import com.reyesmicaela.rickandmorty.data.remote.CharacterApiService
 import com.reyesmicaela.rickandmorty.model.Character
-import com.reyesmicaela.rickandmorty.network.CharacterApiService
 import com.reyesmicaela.rickandmorty.model.CharacterListResponse
 import kotlinx.coroutines.delay
 

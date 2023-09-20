@@ -1,4 +1,4 @@
-package com.reyesmicaela.rickandmorty.data
+package com.reyesmicaela.rickandmorty.data.repository
 
 import com.reyesmicaela.rickandmorty.model.Character
 import com.reyesmicaela.rickandmorty.model.CharacterListResponse

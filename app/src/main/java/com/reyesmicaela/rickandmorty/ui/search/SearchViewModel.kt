@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.reyesmicaela.rickandmorty.data.repository.CharacterRepository
+import com.reyesmicaela.rickandmorty.data.repository.toModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -22,12 +23,13 @@ class SearchViewModel @Inject constructor(
     fun filterCharacterByName(name: String) {
         state= SearchCharacterState.Loading
         viewModelScope.launch {
-            state = try {
-                SearchCharacterState.Success(repository.filterCharacterByName(name))
+            try {
+                repository.charactersByNameDb(name).collect{
+                    state= SearchCharacterState.Success(it.map { characterEntity -> characterEntity.toModel() })}
             } catch (e: IOException) {
-                SearchCharacterState.Error
+              state=  SearchCharacterState.Error
             }catch (e: HttpException){
-                SearchCharacterState.HttpError
+            state=    SearchCharacterState.HttpError
             }
         }
     }

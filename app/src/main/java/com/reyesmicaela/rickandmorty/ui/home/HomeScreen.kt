@@ -29,7 +29,7 @@ fun HomeScreen(
                 onCharacterClick(it)
             })
             CharacterListScreen(
-                characterListResponse = state.characterListResponse,
+                characterList = state.characterListResponse,
                 onCharacterClick = {
                     onCharacterClick(it)
                 }

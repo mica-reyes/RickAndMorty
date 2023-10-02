@@ -30,8 +30,8 @@ import com.reyesmicaela.rickandmorty.ui.components.ShimmerScreen
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchCharacterComponent(
-    viewModel: SearchViewModel = hiltViewModel(),
     modifier: Modifier = Modifier,
+    viewModel: SearchViewModel = hiltViewModel(),
     onCharacterClick: (Character) -> Unit
 ) {
 
@@ -106,7 +106,7 @@ fun SearchCharacterComponent(
                 SearchCharacterState.Loading -> ShimmerScreen(count = 20)
                 is SearchCharacterState.Success ->
                     CharacterListScreen(
-                        characterListResponse = state.characterListResponse,
+                        characterList = state.characterList,
                         onCharacterClick = {character ->
                             onCharacterClick(character)
                         }

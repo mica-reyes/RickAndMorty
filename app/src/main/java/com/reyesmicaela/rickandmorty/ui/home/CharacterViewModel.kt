@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.reyesmicaela.rickandmorty.data.repository.CharacterRepository
+import com.reyesmicaela.rickandmorty.data.repository.toModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -25,12 +26,13 @@ class CharacterViewModel @Inject constructor(
 
     fun getAllCharacters() {
         viewModelScope.launch {
-            state = try {
-                CharacterState.Success(repository.getCharacterList())
+        try {
+              repository.getAllCharacters().collect{
+               state= CharacterState.Success(it.map { characterEntity -> characterEntity.toModel() })}
             } catch (e: IOException) {
-                CharacterState.Error
+             state=   CharacterState.Error
             } catch (e: HttpException) {
-                CharacterState.Error
+                state= CharacterState.Error
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.reyesmicaela.rickandmorty.network
+package com.reyesmicaela.rickandmorty.data.remote
 
 import com.reyesmicaela.rickandmorty.model.Character
 import com.reyesmicaela.rickandmorty.model.CharacterListResponse

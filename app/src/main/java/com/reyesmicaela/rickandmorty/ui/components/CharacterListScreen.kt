@@ -10,13 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.reyesmicaela.rickandmorty.model.Character
-import com.reyesmicaela.rickandmorty.model.CharacterListResponse
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CharacterListScreen(
     modifier: Modifier = Modifier,
-    characterListResponse: CharacterListResponse,
+    characterList: List<Character>,
     onCharacterClick: (Character) -> Unit
 ) {
     LazyVerticalStaggeredGrid(
@@ -24,7 +23,7 @@ fun CharacterListScreen(
         contentPadding = PaddingValues(4.dp),
         modifier = modifier.fillMaxWidth()
     ) {
-        itemsIndexed(items = characterListResponse.results) { index, character ->
+        itemsIndexed(items = characterList) { _, character ->
             CharacterCard(
                 character = character,
                 onCharacterClick = { onCharacterClick(it) }

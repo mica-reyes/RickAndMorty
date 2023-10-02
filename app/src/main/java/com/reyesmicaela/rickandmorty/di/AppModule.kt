@@ -1,8 +1,12 @@
 package com.reyesmicaela.rickandmorty.di
 
-import com.reyesmicaela.rickandmorty.data.CharacterRepository
-import com.reyesmicaela.rickandmorty.data.CharacterRepositoryImpl
-import com.reyesmicaela.rickandmorty.network.CharacterApiService
+import android.app.Application
+import androidx.room.Room
+import com.reyesmicaela.rickandmorty.data.local.CharacterDao
+import com.reyesmicaela.rickandmorty.data.local.RickAndMortyDatabase
+import com.reyesmicaela.rickandmorty.data.remote.CharacterApiService
+import com.reyesmicaela.rickandmorty.data.repository.CharacterRepository
+import com.reyesmicaela.rickandmorty.data.repository.CharacterRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +30,23 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRepository(characterApiService: CharacterApiService): CharacterRepository {
-        return CharacterRepositoryImpl(characterApiService)
+    fun provideRepository(ApiService: CharacterApiService, dao: CharacterDao): CharacterRepository {
+        return CharacterRepositoryImpl(ApiService, dao)
+    }
+
+    @Singleton
+    @Provides
+    fun provideDatabase(application: Application): RickAndMortyDatabase {
+        return Room.databaseBuilder(
+            application,
+            RickAndMortyDatabase::class.java,
+            "rick_and_morty_database"
+        ).fallbackToDestructiveMigration().build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideDao(database: RickAndMortyDatabase): CharacterDao {
+        return database.CharacterDao()
     }
 }

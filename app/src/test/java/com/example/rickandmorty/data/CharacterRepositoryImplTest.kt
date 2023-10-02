@@ -4,8 +4,8 @@ package com.example.rickandmorty.data
 import com.example.rickandmorty.fake.FakeCharacterApiService
 import com.example.rickandmorty.fake.FakeDataSource
 import com.reyesmicaela.rickandmorty.model.CharacterListResponse
-import com.reyesmicaela.rickandmorty.network.CharacterApiService
-import com.reyesmicaela.rickandmorty.data.CharacterRepositoryImpl
+import com.reyesmicaela.rickandmorty.data.remote.CharacterApiService
+import com.reyesmicaela.rickandmorty.data.repository.CharacterRepositoryImpl
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test

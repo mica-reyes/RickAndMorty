@@ -1,5 +1,12 @@
 package com.reyesmicaela.rickandmorty.ui
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.EaseIn
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -21,9 +28,23 @@ fun RickAndMortyApp() {
 fun RickAndMortyNavHost(
     navController: NavHostController
 ) {
-    NavHost(navController = navController, startDestination = "homeScreen") {
-
-        composable(route = "homeScreen") {
+    NavHost(navController = navController,
+        startDestination = "homeScreen",
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None }
+    ) {
+        composable(route = "homeScreen",
+            enterTransition = {
+                fadeIn(
+                    animationSpec = tween(
+                        300, easing = LinearEasing
+                    )
+                ) + slideIntoContainer(
+                    animationSpec = tween(300, easing = EaseIn),
+                    towards = AnimatedContentTransitionScope.SlideDirection.End
+                )
+            }
+            ) {
             HomeScreen(onCharacterClick = {
                 navController.navigate("detail/${it.id}")
             })
@@ -39,7 +60,17 @@ fun RickAndMortyNavHost(
                 navArgument("characterId") {
                     type = NavType.IntType
                 }
-            )
+            ), enterTransition = {
+                fadeIn(
+                    animationSpec = tween(
+                        300, easing = LinearEasing
+                    )
+                ) + slideIntoContainer(
+                    animationSpec = tween(300, easing = EaseIn),
+                    towards = AnimatedContentTransitionScope.SlideDirection.Start
+                )
+            },
+
         ) { DetailScreen() }
     }
 }

@@ -2,7 +2,6 @@ package com.reyesmicaela.rickandmorty.ui.search
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -24,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.reyesmicaela.rickandmorty.model.Character
 import com.reyesmicaela.rickandmorty.ui.components.CharacterListScreen
-import com.reyesmicaela.rickandmorty.ui.components.ErrorScreen
 import com.reyesmicaela.rickandmorty.ui.components.ShimmerScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,7 +43,12 @@ fun SearchCharacterComponent(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
-        query = text,
+        query = if (active) {
+            text
+        } else {
+            text = ""
+            text
+        },
         onQueryChange = {
             text = it
             viewModel.filterCharacterByName(text)
@@ -60,15 +63,22 @@ fun SearchCharacterComponent(
         active = active,
         onActiveChange = {
             active = it
-            text = ""
+            if (!active) {
+                focusManager.clearFocus()
+            }
         },
         trailingIcon = {
-            IconButton(onClick = {
-                if (text.isNotEmpty()) {
-                    text = ""
+            if (active) {
+                IconButton(onClick = {
+                    if (text.isNotEmpty()) {
+                        text = ""
+                    } else {
+                        active = false
+                        focusManager.clearFocus()
+                    }
+                }) {
+                    Icon(Icons.Default.Close, contentDescription = null)
                 }
-            }, enabled = text.isNotEmpty()) {
-                Icon(Icons.Default.Close, contentDescription = null)
             }
         }
     ) {
@@ -94,20 +104,16 @@ fun SearchCharacterComponent(
             }
         } else {
             when (val state = viewModel.state) {
-                SearchCharacterState.HttpError -> SearchErrorScreen(
+                SearchCharacterState.NotFound -> SearchErrorScreen(
                     modifier = modifier
                         .fillMaxWidth()
                         .padding(0.dp, 50.dp)
-                )
-                SearchCharacterState.Error -> ErrorScreen(
-                    retryAction = { viewModel.filterCharacterByName(text) },
-                    modifier = modifier.fillMaxSize()
                 )
                 SearchCharacterState.Loading -> ShimmerScreen(count = 20)
                 is SearchCharacterState.Success ->
                     CharacterListScreen(
                         characterList = state.characterList,
-                        onCharacterClick = {character ->
+                        onCharacterClick = { character ->
                             onCharacterClick(character)
                         }
                     )
@@ -115,4 +121,3 @@ fun SearchCharacterComponent(
         }
     }
 }
-

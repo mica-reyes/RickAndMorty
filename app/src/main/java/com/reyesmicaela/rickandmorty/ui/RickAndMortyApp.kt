@@ -44,15 +44,16 @@ fun RickAndMortyNavHost(
                     towards = AnimatedContentTransitionScope.SlideDirection.End
                 )
             }
-            ) {
+        ) {
             HomeScreen(onCharacterClick = {
                 navController.navigate("detail/${it.id}")
             })
         }
         composable(route = "searchScreen") {
-            SearchCharacterComponent(onCharacterClick = {
-                navController.navigate("detail/${it.id}")
-            })
+            SearchCharacterComponent(
+                onCharacterClick = {
+                    navController.navigate("detail/${it.id}")
+                })
         }
         composable(
             route = "detail/{characterId}",
@@ -60,7 +61,8 @@ fun RickAndMortyNavHost(
                 navArgument("characterId") {
                     type = NavType.IntType
                 }
-            ), enterTransition = {
+            ),
+            enterTransition = {
                 fadeIn(
                     animationSpec = tween(
                         300, easing = LinearEasing
@@ -71,6 +73,6 @@ fun RickAndMortyNavHost(
                 )
             },
 
-        ) { DetailScreen() }
+            ) { DetailScreen() }
     }
 }

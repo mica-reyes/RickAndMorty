@@ -6,11 +6,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.reyesmicaela.rickandmorty.data.repository.CharacterRepository
-import com.reyesmicaela.rickandmorty.data.repository.toModel
+import com.reyesmicaela.rickandmorty.data.toModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.io.IOException
+
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,21 +19,16 @@ class CharacterViewModel @Inject constructor(
 ) : ViewModel() {
     var state: CharacterState by mutableStateOf(CharacterState.Loading)
         private set
-
+//sunflower usa livedata
     init {
         getAllCharacters()
     }
 
     fun getAllCharacters() {
         viewModelScope.launch {
-        try {
+            delay(800)
               repository.getAllCharacters().collect{
                state= CharacterState.Success(it.map { characterEntity -> characterEntity.toModel() })}
-            } catch (e: IOException) {
-             state=   CharacterState.Error
-            } catch (e: HttpException) {
-                state= CharacterState.Error
-            }
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.reyesmicaela.rickandmorty.ui.components
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
@@ -11,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.reyesmicaela.rickandmorty.model.Character
 
-@OptIn(ExperimentalFoundationApi::class)
+
 @Composable
 fun CharacterListScreen(
     modifier: Modifier = Modifier,

@@ -3,11 +3,12 @@ package com.reyesmicaela.rickandmorty.data.repository
 import com.reyesmicaela.rickandmorty.data.local.CharacterDao
 import com.reyesmicaela.rickandmorty.data.local.CharacterEntity
 import com.reyesmicaela.rickandmorty.data.remote.CharacterApiService
+import com.reyesmicaela.rickandmorty.data.toEntity
 import com.reyesmicaela.rickandmorty.model.Character
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 
-class CharacterRepositoryImpl(
+class  CharacterRepositoryImpl(
     private val characterApiService: CharacterApiService,
     private val dao: CharacterDao
 ) : CharacterRepository {
@@ -43,28 +44,3 @@ class CharacterRepositoryImpl(
 
 }
 
-fun Character.toEntity(): CharacterEntity {
-    return CharacterEntity(
-        id = this.id,
-        name = this.name,
-        gender = this.gender,
-        image = this.image,
-        location = this.location,
-        origin = this.origin,
-        species = this.species,
-        status = this.status
-    )
-}
-
-fun CharacterEntity.toModel(): Character {
-    return Character(
-        id = this.id,
-        name = this.name,
-        gender = this.gender,
-        image = this.image,
-        location = this.location,
-        origin = this.origin,
-        species = this.species,
-        status = this.status
-    )
-}

@@ -5,21 +5,26 @@ import com.reyesmicaela.rickandmorty.data.local.CharacterEntity
 import com.reyesmicaela.rickandmorty.data.remote.CharacterApiService
 import com.reyesmicaela.rickandmorty.data.toEntity
 import com.reyesmicaela.rickandmorty.model.Character
+import com.reyesmicaela.rickandmorty.model.CharacterResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 
-class  CharacterRepositoryImpl(
+class CharacterRepositoryImpl(
     private val characterApiService: CharacterApiService,
     private val dao: CharacterDao
 ) : CharacterRepository {
 
-    override suspend fun getAllCharacters(): Flow<List<CharacterEntity>> {
+    override suspend fun getAllCharacters(): CharacterResult {
         val characterListDb = dao.getCharacters()
         if (characterListDb.first().isEmpty()) {
-            val characterListRemote = getCharacterListRemote()
-            insertCharacterLocally(characterListRemote)
+            try {
+                val characterListRemote = getCharacterListRemote()
+                insertCharacterLocally(characterListRemote)
+            } catch (e: Exception) {
+                return CharacterResult(error = e)
+            }
         }
-        return characterListDb
+        return CharacterResult(success = characterListDb)
     }
 
     override suspend fun getCharacterListRemote(): List<Character> {
@@ -36,10 +41,6 @@ class  CharacterRepositoryImpl(
 
     override suspend fun insertCharacterLocally(characterList: List<Character>) {
         dao.insertCharacter(characterList.map { it.toEntity() })
-    }
-
-    override fun getDbCharacterById(id: Int): Flow<CharacterEntity> {
-        return dao.getCharacterById(id)
     }
 
 }

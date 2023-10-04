@@ -28,3 +28,18 @@ fun CharacterEntity.toModel(): Character {
         status = this.status
     )
 }
+
+fun List<CharacterEntity>.toModel(): List<Character> {
+ return   this.map {
+        Character(
+            id = it.id,
+            name = it.name,
+            gender = it.gender,
+            image = it.image,
+            location = it.location,
+            origin = it.origin,
+            species = it.species,
+            status = it.status
+        )
+    }
+}

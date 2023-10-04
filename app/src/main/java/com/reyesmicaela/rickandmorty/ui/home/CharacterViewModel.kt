@@ -10,7 +10,6 @@ import com.reyesmicaela.rickandmorty.data.toModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,7 +18,7 @@ class CharacterViewModel @Inject constructor(
 ) : ViewModel() {
     var state: CharacterState by mutableStateOf(CharacterState.Loading)
         private set
-//sunflower usa livedata
+
     init {
         getAllCharacters()
     }
@@ -27,8 +26,14 @@ class CharacterViewModel @Inject constructor(
     fun getAllCharacters() {
         viewModelScope.launch {
             delay(800)
-              repository.getAllCharacters().collect{
-               state= CharacterState.Success(it.map { characterEntity -> characterEntity.toModel() })}
+            val result = repository.getAllCharacters()
+            if (result.error != null) {
+                state = CharacterState.Error
+            } else {
+                result.success.collect {
+                    state = CharacterState.Success(it.toModel())
+                }
+            }
         }
     }
 }

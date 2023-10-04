@@ -23,14 +23,14 @@ fun ErrorScreen(retryAction: () -> Unit  , modifier: Modifier = Modifier) {
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_connection_error),
-            contentDescription = stringResource(R.string.error_de_conexion)
+            contentDescription = stringResource(R.string.connection_error)
         )
         Text(
-            text = stringResource(id = R.string.error_de_conexion),
+            text = stringResource(id = R.string.connection_error),
             modifier = Modifier.padding(16.dp)
         )
         TextButton(onClick = retryAction) {
-            Text(text = stringResource(R.string.reintentar).uppercase())
+            Text(text = stringResource(R.string.retry).uppercase())
         }
     }
 }

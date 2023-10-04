@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">RickAndMorty</string>
-    <string name="error_de_conexion">Error de conexión</string>
-    <string name="reintentar">Reintentar</string>
+    <string name="connection_error">Connection Error</string>
+    <string name="retry">Retry</string>
+    <string name="no_matches_found">No matches found</string>
 </resources>

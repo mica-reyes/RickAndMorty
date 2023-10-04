@@ -25,7 +25,7 @@ class SearchViewModel @Inject constructor(
                 state = if (it.isEmpty()) {
                     SearchCharacterState.NotFound
                 } else {
-                    SearchCharacterState.Success(it.map { characterEntity -> characterEntity.toModel() })
+                    SearchCharacterState.Success(it.toModel())
                 }
             }
         }

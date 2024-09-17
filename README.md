@@ -1,4 +1,5 @@
-# RickAndMorty
+# RickAndMorty (Jetpack Compose)
+
 [descargar apk](https://github.com/mica-reyes/RickAndMorty/blob/master/app-debug.apk)
 ## Home screen
 <img src=https://github.com/user-attachments/assets/1fc32e21-96ef-4232-ba42-d8e259598305 width=30% height=25%> 

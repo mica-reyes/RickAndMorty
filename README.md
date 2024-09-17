@@ -2,6 +2,7 @@
 
 ## Home screen
 <img src=https://github.com/user-attachments/assets/1fc32e21-96ef-4232-ba42-d8e259598305 width=25% height=25%> 
+
 ## Detail Screen
 <img src=https://github.com/user-attachments/assets/4a03bf18-c9af-45d2-874d-a3f9e802c5f8 width=25% height=25%> 
 <img src=https://github.com/user-attachments/assets/d1eb60be-2a68-44e3-9b47-f080503dbf11 width=25% height=25%> 

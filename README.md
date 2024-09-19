@@ -1,6 +1,7 @@
 # RickAndMorty (Jetpack Compose)
 
-Proyecto realizado en Android Studio utilizando Kotlin, Jetpack Compose y arquitectura MVVM. /n
+Proyecto realizado en Android Studio utilizando Kotlin, Jetpack Compose y arquitectura MVVM.
+
 Bibliotecas utilizadas:
 * Room
 * Navigation
